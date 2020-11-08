@@ -1,7 +1,8 @@
 package com.lzk.jokeapp.app
 
-import com.alibaba.fastjson.JSON
-import com.alibaba.fastjson.TypeReference
+import android.util.Log
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.lzk.jokeapp.ext.navigation.BottomBar
 import com.lzk.jokeapp.ext.navigation.Destination
 import java.io.BufferedReader
@@ -23,23 +24,23 @@ object AppConfig {
     fun getDestConfig(): HashMap<String, Destination>{
         if (mDestConfig == null){
             val content = parseFile("destination.json")
-            val type = object :TypeReference<HashMap<String, Destination>>(){}.type
-            mDestConfig = JSON.parseObject(content,type)
+            val type = object :TypeToken<HashMap<String, Destination>>(){}.type
+            mDestConfig = Gson().fromJson(content,type)
         }
         return mDestConfig!!
     }
 
-    fun getBottomBar(): BottomBar{
+    fun getBottomBarConfig(): BottomBar{
         if (mBottomBar == null){
             val content = parseFile("main_tabs_config.json")
-            mBottomBar = JSON.parseObject(content,BottomBar::class.java)
+            mBottomBar = Gson().fromJson(content,BottomBar::class.java)
         }
 
         return mBottomBar!!
     }
 
     private fun parseFile(fileName: String): String{
-        val assetManager = AppGlobals.getApplication().resources.assets
+        val assetManager = AppGlobals.getApplication().assets
         var inputStream: InputStream? = null
         var reader: BufferedReader? = null
         val strBuilder = StringBuilder()

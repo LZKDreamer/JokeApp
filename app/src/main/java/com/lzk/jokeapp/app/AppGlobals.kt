@@ -1,7 +1,6 @@
 package com.lzk.jokeapp.app
 
 import android.app.Application
-import java.lang.reflect.Method
 
 /**
  * Author: LiaoZhongKai
@@ -15,12 +14,12 @@ object AppGlobals {
     fun getApplication(): Application{
         if (mApplication == null){
             try {
-                val method = Class.forName("android.app.ActivityThread").getDeclaredMethod("currentApplication")
-                return method.invoke(null,null) as Application
+                val method = Class.forName("android.app.ActivityThread").getMethod("currentApplication")
+                mApplication = method.invoke(null) as Application
+                return mApplication!!
             }catch (e: Exception){
-
+                e.printStackTrace()
             }
-
         }
         return mApplication!!
     }

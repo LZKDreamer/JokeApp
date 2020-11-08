@@ -14,7 +14,7 @@ package com.lzk.jokeapp.ext.navigation
 data class BottomBar (
     var activeColor: String,
     var inActiveColor: String,
-    var tabs: List<Tab>,
+    var tabs: MutableList<Tab>,
     var selectTab: Int = 0//底部导航栏默认选中项
 )
 
@@ -32,5 +32,5 @@ data class Tab(
     var index: Int,
     var pageUrl: String,
     var title: String,
-    var tintColor: String
+    var tintColor: String?
 )
