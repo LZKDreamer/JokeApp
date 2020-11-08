@@ -53,6 +53,8 @@ dependencies {
     kapt project(":libnavcompiler")
     //endregion
 
-    
+    //region FastJson
+    implementation 'com.alibaba:fastjson:1.2.75'
+    //endregion
 
 }
